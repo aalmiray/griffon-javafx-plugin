@@ -31,7 +31,6 @@ class JavaFxApplicationFactory extends AbstractFactory {
     private static final Logger LOG = LoggerFactory.getLogger(JavaFxApplicationFactory)
     
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes) {
-        if(LOG.debugEnabed) LOG.debug "app from builder is ${builder.app}, stage is ${builder.app.primaryStage}"
         return builder.app.primaryStage;
     }
 
@@ -57,16 +56,12 @@ class JavaFxApplicationFactory extends AbstractFactory {
         final stage = node as Stage
         Scene scene = builder.sceneWrapper?.build() ?: new Scene(new Group(), 800, 600)
         stage.scene = scene
-        if(LOG.debugEnabed) LOG.debug "sceneWrapper is $builder.sceneWrapper"
-        if(LOG.debugEnabed) LOG.debug "stage is $stage, scene is $scene"
-        if(LOG.debugEnabed) LOG.debug "stage.scene is ${stage.scene}"
         stage.visible = true
     }
 
     @Override
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
         if (child instanceof SceneWrapper) {
-            if(LOG.debugEnabed) LOG.debug "Application got child SceneWrapper"
             builder.sceneWrapper = child
         }
     }
